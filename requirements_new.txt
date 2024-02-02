@@ -1,0 +1,12 @@
+cobra==0.22.1
+joblib==1.1.0
+numpy==1.21.2
+optlang==1.5.2
+pandas
+torch
+torch_geometric==1.7.2
+torch_scatter==2.0.8
+torch_sparse==0.6.11
+tqdm==4.62.1
+node2vec
+cobra
