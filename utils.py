@@ -11,6 +11,8 @@ from cobra.util.solver import linear_reaction_coefficients
 import warnings
 import re
 
+import pdb
+
 warnings.filterwarnings("ignore")
 
 
@@ -38,7 +40,11 @@ def get_data(path, sample):
     stoichiometric_matrix = create_stoichiometric_matrix(model)
     incidence_matrix = np.abs(stoichiometric_matrix) > 0
     remove_rxn_index = np.sum(incidence_matrix, axis=0) <= 1
-    model.remove_reactions(model.reactions[remove_rxn_index], remove_orphans=True)
+    remove_indices = np.where(remove_rxn_index)[0]
+    reactions_to_remove = [model.reactions[idx] for idx in remove_indices]      
+    model.remove_reactions(reactions_to_remove, remove_orphans=True)
+
+    # model.remove_reactions(model.reactions[remove_rxn_index], remove_orphans=True)
     return model, np.abs(create_stoichiometric_matrix(model)) > 0
 
 

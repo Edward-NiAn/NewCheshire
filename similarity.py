@@ -10,7 +10,7 @@ import os
 def get_similarity_score(name, top_N):
     path = './results/predicted_scores'
     all_files = sorted(os.listdir(path))
-    model_pool = cobra.io.read_sbml_model('./data/pools/bigg_universe.xml')
+    model_pool = cobra.io.read_sbml_model('./data/pools/Refm.xml')
 
     for sample in all_files:
         if sample.endswith('csv'):
