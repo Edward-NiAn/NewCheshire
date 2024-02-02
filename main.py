@@ -16,10 +16,10 @@ def main():
     # predict scores for reactions in reaction pool
     repeat = 5
     for i in range(repeat):
-        get_prediction_score(name='zimmermann')
+        get_prediction_score(name='GSE')
 
     # predict mean similarity between candidate reactions and existing reactions
-    get_similarity_score(name='zimmermann', top_N=2000)
+    get_similarity_score(name='GSE', top_N=2000)
 
     # predict metabolic phenotypes
     # If you only want prediction and similarity scores, comment out the following line
