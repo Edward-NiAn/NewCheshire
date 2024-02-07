@@ -29,7 +29,7 @@ def predict(feature, incidence_matrix, model):
 def get_prediction_score(name):
     path = './data/' + name
     namelist = get_filenames(path)
-    universe_pool = cobra.io.read_sbml_model('./data/pools/bigg_universe.xml')
+    universe_pool = cobra.io.read_sbml_model('./data/pools/Refm.xml')
     for sample in namelist:
         if sample.endswith('.xml'):
             universe_pool_copy = universe_pool.copy()
@@ -49,13 +49,21 @@ def get_prediction_score(name):
             for _ in tqdm(range(args.max_epoch)):
                 train(incidence_matrix_pos, y, incidence_matrix, model, optimizer)
             score = predict(incidence_matrix_pos, incidence_matrix_cand, model)
-            score_df = pd.DataFrame(data=score.detach().numpy(), index=rxn_pool_df.columns)
-            if exists('./results/predicted_scores/' + sample[:-4] + '.csv'):
-                exist_score_df = pd.read_csv('./results/predicted_scores/' + sample[:-4] + '.csv', index_col=0)
+            score_df = pd.DataFrame(data=score.detach().numpy(), index=rxn_pool_df.columns) #rxns not included
+            score_df_exist = pd.DataFrame(data = score.detach().numpy(), index = rxn_df.columns) #rxns included
+            if exists('./results/predicted_scores_GSE/' + sample[:-4] + '.csv'):
+                exist_score_df = pd.read_csv('./results/predicted_scores_GSE/' + sample[:-4] + '.csv', index_col=0)
                 score_df = pd.concat([exist_score_df, score_df], axis=1)
-                score_df.to_csv('./results/predicted_scores/' + sample[:-4] + '.csv')
+                score_df.to_csv('./results/predicted_scores_GSE/' + sample[:-4] + '.csv')
             else:
-                score_df.to_csv('./results/predicted_scores/' + sample[:-4] + '.csv')
+                score_df.to_csv('./results/predicted_scores_GSE/' + sample[:-4] + '.csv')
+
+            if exists('./results/predicted_scores_GSE/' + sample[:-4] + '_exist.csv'):
+                exist_score_df_exist = pd.read_csv('./results/predicted_scores_GSE/' + sample[:-4] + '_exist.csv', index_col=0)
+                score_df = pd.concat([exist_score_df_exist, score_df_exist], axis=1)
+                score_df.to_csv('./results/predicted_scores_GSE/' + sample[:-4] + '_exist.csv')
+            else:
+                score_df.to_csv('./results/predicted_scores_GSE/' + sample[:-4] + '_exist.csv')
 
 
 #if __name__ == "__main__":
