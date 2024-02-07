@@ -9,8 +9,9 @@ logging.disable()
 def main():
     # create results folder
     os.system("mkdir results")
-    os.system("mkdir results/predicted_scores")
-    os.system("mkdir results/similarity_scores")
+    os.system("mkdir results/predicted_scores_GSE")
+    os.system("mkdir results/predicted_scores_GSE_other")
+    os.system("mkdir results/similarity_scores_GSE")
     os.system("mkdir results/gaps")
 
     # predict scores for reactions in reaction pool

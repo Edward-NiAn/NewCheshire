@@ -72,6 +72,7 @@ def get_data_from_pool(path, sample, model_pool_df, rxns_w_genes):
         rxns = np.array([rxn.id for rxn in model.reactions])
     model_df = model_pool_df[rxns]
     cols2use = model_pool_df.columns.difference(model_df.columns)
+    
     return model_df, model_pool_df[cols2use], added_rxns
 
 
@@ -82,7 +83,8 @@ def get_data_from_pool2(path, sample, model_pool):
     model_pool_df = create_stoichiometric_matrix(model_pool, array_type='DataFrame')
     model_df = model_pool_df[rxns]
     cols2use = model_pool_df.columns.difference(model_df.columns)
-    return model_df, model_pool_df[cols2use]
+    
+    return model_df, model_pool_df[cols2use], model_pool_df
 
 
 def create_hyperedge_index(incidence_matrix):
