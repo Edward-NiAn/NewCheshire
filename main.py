@@ -12,6 +12,7 @@ def main():
     os.system("mkdir results/predicted_scores_GSE")
     os.system("mkdir results/predicted_scores_GSE_other")
     os.system("mkdir results/similarity_scores_GSE")
+    os.system("mkdir results/similarity_socres_GSE_all")
     os.system("mkdir results/gaps")
 
     # predict scores for reactions in reaction pool
@@ -20,11 +21,11 @@ def main():
         get_prediction_score(name='GSE')
 
     # predict mean similarity between candidate reactions and existing reactions
-    get_similarity_score(name='GSE', top_N=2000)
+    # get_similarity_score(name='GSE', top_N=7500)
 
     # predict metabolic phenotypes
     # If you only want prediction and similarity scores, comment out the following line
-    validate()
+    # validate()
 
 
 if __name__ == "__main__":

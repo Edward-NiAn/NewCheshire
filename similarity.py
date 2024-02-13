@@ -8,7 +8,7 @@ import os
 
 
 def get_similarity_score(name, top_N):
-    path = './results/predicted_scores_GSE'
+    path = './results/predicted_scores_GSE_all'
     all_files = sorted(os.listdir(path))
     model_pool = cobra.io.read_sbml_model('./data/pools/Refm.xml')
 
@@ -32,7 +32,7 @@ def get_similarity_score(name, top_N):
             predicted_scores = scores.loc[candidate_rxns].values
             all_scores = np.concatenate((predicted_scores.reshape(-1, 1), similarity_max.reshape(-1, 1)), axis=1)
             all_scores_df = pd.DataFrame(data=all_scores, index=candidate_rxns, columns=['predicted_scores', 'similarity_scores'])
-            all_scores_df.to_csv('./results/similarity_scores_GSE/' + sample)
+            all_scores_df.to_csv('./results/similarity_socres_GSE_all/' + sample)
 
 
 #if __name__ == "__main__":
