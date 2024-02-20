@@ -11,6 +11,7 @@ def main():
     os.system("mkdir results")
     os.system("mkdir results/predicted_scores_GSE")
     os.system("mkdir results/predicted_scores_GSE_other")
+    os.system("mkdir results/predicted_scores_GSE_all")
     os.system("mkdir results/similarity_scores_GSE")
     os.system("mkdir results/similarity_socres_GSE_all")
     os.system("mkdir results/gaps")

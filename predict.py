@@ -33,6 +33,7 @@ def get_prediction_score(name):
     namelist = get_filenames(path)
     universe_pool = cobra.io.read_sbml_model('./data/pools/Refm.xml')
     for sample in namelist:
+        print(sample)
         if sample.endswith('.xml'):
             universe_pool_copy = universe_pool.copy()
             rxn_df, rxn_pool_df,rxn_pool_all_df = get_data_from_pool2(path, sample, universe_pool_copy)
@@ -80,19 +81,19 @@ def get_prediction_score(name):
             else:
                 score_df.to_csv('./results/predicted_scores_GSE/' + sample[:-4] + '.csv')
 
-            if exists('./results/predicted_scores_GSE_other/' + sample[:-4] + '_exist.csv'):
-                exist_score_df_exist = pd.read_csv('./results/predicted_scores_GSE_other/' + sample[:-4] + '_exist.csv', index_col=0)
+            if exists('./results/predicted_scores_GSE_other/' + sample[:-4] + '.csv'):
+                exist_score_df_exist = pd.read_csv('./results/predicted_scores_GSE_other/' + sample[:-4] + '.csv', index_col=0)
                 score_df = pd.concat([exist_score_df_exist, score_df_exist], axis=1)
-                score_df.to_csv('./results/predicted_scores_GSE_other/' + sample[:-4] + '_exist.csv')
+                score_df.to_csv('./results/predicted_scores_GSE_other/' + sample[:-4] + '.csv')
             else:
-                score_df.to_csv('./results/predicted_scores_GSE_other/' + sample[:-4] + '_exist.csv')
+                score_df.to_csv('./results/predicted_scores_GSE_other/' + sample[:-4] + '.csv')
 
-            if exists('./results/predicted_scores_GSE/' + sample[:-4] + '_all.csv'):
-                exist_score_df_all = pd.read_csv('./results/predicted_scores_GSE_other/' + sample[:-4] + '_all.csv', index_col=0)
+            if exists('./results/predicted_scores_GSE_all/' + sample[:-4] + '.csv'):
+                exist_score_df_all = pd.read_csv('./results/predicted_scores_GSE_all/' + sample[:-4] + '.csv', index_col=0)
                 score_df = pd.concat([exist_score_df_all, score_df_all], axis=1)
-                score_df.to_csv('./results/predicted_scores_GSE_other/' + sample[:-4] + '_all.csv')
+                score_df.to_csv('./results/predicted_scores_GSE_all/' + sample[:-4] + '.csv')
             else:
-                score_df.to_csv('./results/predicted_scores_GSE_other/' + sample[:-4] + '_all.csv')
+                score_df.to_csv('./results/predicted_scores_GSE_all/' + sample[:-4] + '.csv')
 
 
 #if __name__ == "__main__":
